@@ -1,4 +1,5 @@
 mysql-connector-python 
+openpyxl
 pandas
 yagmail 
 python-dotenv
