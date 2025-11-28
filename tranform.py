@@ -1,5 +1,5 @@
 import pandas as pd
-from datetime import datetime, date
+from datetime import datetime
 import os
 from dotenv import load_dotenv
 import yagmail
@@ -36,8 +36,7 @@ def export_excel(data_docs):
   
  # Aplicar los headers en mayúsculas al exportar
   data_docs.columns = headers_renov
-
-  today = date.today()
+  
   file_name = f"Renovacion_2026_{today.strftime('%Y-%m-%d')}.xlsx"
 
   data_docs.to_excel(file_name, index=False, sheet_name="Renovación 2026")
