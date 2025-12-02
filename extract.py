@@ -6,13 +6,13 @@ def extract_docs_renov(cursor):
     p.prestacion_alumno, p.alumno_apellido, p.alumno_nombre, a.alumno_mail, a.alumno_dni,
     p.prestacion_escuela_turno, p.prestacion_renueva_prox, o.os_nombre, l.localidad_nombre,
     par.partido_nombre,
-    CASE WHEN docs.docalumnobuzon_desc IN ('DNI', 'DNI_FREN') THEN docs.docalumnobuzon_fec_carga END AS cred_dni,
-    CASE WHEN docs.docalumnobuzon_desc = 'CUD' THEN docs.docalumnobuzon_fec_carga END AS cred_cud,
-    CASE WHEN docs.docalumnobuzon_desc = 'CREDENCIAL_OS_ALUMNO' THEN docs.docalumnobuzon_fec_carga END AS cred_os,
-    CASE WHEN docs.docalumnobuzon_desc = 'RESUM_HIST_CLIN' THEN docs.docalumnobuzon_fec_carga END AS rhc,
-    CASE WHEN docs.docalumnobuzon_desc = 'CONST_ALUMNO_REG' THEN docs.docalumnobuzon_fec_carga END AS car,
-    CASE WHEN docs.docalumnobuzon_desc = 'ORDEN_MED' THEN docs.docalumnobuzon_fec_carga END AS ord_med,
-    CASE WHEN docs.docalumnobuzon_desc = 'OTROS' THEN docs.docalumnobuzon_fec_carga END AS otros,
+    MAX(CASE WHEN docs.docalumnobuzon_desc IN ('DNI', 'DNI_FREN') THEN docs.docalumnobuzon_fec_carga END) AS cred_dni,
+    MAX(CASE WHEN docs.docalumnobuzon_desc = 'CUD' THEN docs.docalumnobuzon_fec_carga END) AS cred_cud,
+    MAX(CASE WHEN docs.docalumnobuzon_desc = 'CREDENCIAL_OS_ALUMNO' THEN docs.docalumnobuzon_fec_carga END) AS cred_os,
+    MAX(CASE WHEN docs.docalumnobuzon_desc = 'RESUM_HIST_CLIN' THEN docs.docalumnobuzon_fec_carga END) AS rhc,
+    MAX(CASE WHEN docs.docalumnobuzon_desc = 'CONST_ALUMNO_REG' THEN docs.docalumnobuzon_fec_carga END) AS car,
+    MAX(CASE WHEN docs.docalumnobuzon_desc = 'ORDEN_MED' THEN docs.docalumnobuzon_fec_carga END) AS ord_med,
+    MAX(CASE WHEN docs.docalumnobuzon_desc = 'OTROS' THEN docs.docalumnobuzon_fec_carga END) AS otros,
     p.prestacion_estado_descrip
   FROM v_prestaciones p
   LEFT JOIN v_terapias t 
