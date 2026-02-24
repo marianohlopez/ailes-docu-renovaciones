@@ -31,7 +31,7 @@ def extract_docs_renov(cursor):
       ON a.alumno_id = docs.docalumnobuzon_alumno
         AND docs.ubicacion = 'en-buzon'
     WHERE 
-      p.prestacion_anio IN (2025,2026)
+      p.prestacion_anio
       AND p.prestacion_estado IN (0,1,3)
       AND p.prestacion_alumno != 522
     GROUP BY
@@ -49,8 +49,7 @@ def extract_docs_renov(cursor):
       END
     ) > 0
     ORDER BY
-      p.prestacion_alumno,
-      p.prestacion_anio
+      p.alumno_apellido
   """
 
   cursor.execute(query)
